@@ -23,7 +23,7 @@ console.log(list.length); // 3
 Выдает значение первого элемента в списке
 
 ```js
-import LinkedList from 'core/linked-list';
+import LinkedList from 'data-structures/linked-list';
 
 const list = new LinkedList();
   
@@ -37,7 +37,7 @@ console.log(list.first); // 10
 Выдает значение последнего элемента в списке
 
 ```js
-import LinkedList from 'core/linked-list';
+import LinkedList from 'data-structures/linked-list';
 
 const list = new LinkedList();
   
@@ -52,7 +52,7 @@ console.log(list.last); // 20
 Длина списка
 
 ```js
-import LinkedList from 'core/linked-list';
+import LinkedList from 'data-structures/linked-list';
 
 const list = new LinkedList();
   
@@ -64,10 +64,10 @@ console.log(list.length); // 2
 
 ### push
 
-Добавляет элемент в конец списка и возвращает новую дину списка
+Добавляет элемент в конец списка и возвращает новую длину списка
 
 ```js
-import LinkedList from 'core/linked-list';
+import LinkedList from 'data-structures/linked-list';
 
 const list = new LinkedList();
   
@@ -82,7 +82,7 @@ console.log(Array.from(list)); // [10, 20]
 Удаляет последний элемент списка и возвращает этот элемент
 
 ```js
-import LinkedList from 'core/linked-list';
+import LinkedList from 'data-structures/linked-list';
 
 const list = new LinkedList();
   
@@ -99,7 +99,7 @@ console.log(Array.from(list)); // [10]
 Удаляет первый элемент списка и возвращает этот элемент
 
 ```js
-import LinkedList from 'core/linked-list';
+import LinkedList from 'data-structures/linked-list';
 
 const list = new LinkedList();
   
@@ -116,7 +116,7 @@ console.log(Array.from(list)); // [20]
 Добавляет элемент в начало списка и возвращает новую длину списка
 
 ```js
-import LinkedList from 'core/linked-list';
+import LinkedList from 'data-structures/linked-list';
 
 const list = new LinkedList();
   
