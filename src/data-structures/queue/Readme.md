@@ -66,8 +66,12 @@ queue.push(10);
 queue.push(20); 
 
 queue.shift(); // 10
-
 console.log(queue.head); // 20
+
+queue.shift(); // 20
+console.log(queue.head); // null
+
+queue.shift(); // Exception 'Queue is empty'
 ```
 
 ### DoubleQueue extends SimpleQueue
@@ -117,7 +121,11 @@ queue.push(10);
 queue.push(20); 
 
 queue.pop(); // 20
-
 console.log(queue.tail); // 10
+
+queue.pop(); // 10
+console.log(queue.tail); // null
+
+queue.pop(); // Exception 'Queue is empty'
 ```
 
