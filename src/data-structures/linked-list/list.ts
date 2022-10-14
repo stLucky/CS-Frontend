@@ -19,14 +19,14 @@ export default class LinkedList<T> {
     return this.#lengthStore;
   }
 
-  isEmpty() {
+  get isEmpty() {
     return this.#firstNode == null;
   }
 
   push(value: T) {
     const node = new Node(value);
 
-    if (this.isEmpty()) {
+    if (this.isEmpty) {
       this.#firstNode = node;
     }
 
@@ -42,7 +42,7 @@ export default class LinkedList<T> {
   }
 
   pop() {
-    if (this.isEmpty()) {
+    if (this.isEmpty) {
       return null;
     }
 
@@ -62,7 +62,7 @@ export default class LinkedList<T> {
   }
 
   shift() {
-    if (this.isEmpty()) {
+    if (this.isEmpty) {
       return null;
     }
 
@@ -85,7 +85,7 @@ export default class LinkedList<T> {
   unshift(value: T) {
     const node = new Node(value);
 
-    if (this.isEmpty()) {
+    if (this.isEmpty) {
       this.#lastNode = node;
     } else {
       this.#firstNode!.prev = node;
