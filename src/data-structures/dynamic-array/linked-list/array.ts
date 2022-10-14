@@ -1,8 +1,8 @@
 import LinkedList from '../../linked-list';
 
-import type { IDynamicArray } from './interface';
+import type { IListDynamicArray } from './interface';
 
-export default class DynamicArray<T> implements IDynamicArray<T> {
+export default class ListDynamicArray<T> implements IListDynamicArray<T> {
   #list: LinkedList<T[]>;
 
   #length = 0;

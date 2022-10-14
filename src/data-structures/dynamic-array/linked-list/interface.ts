@@ -1,4 +1,4 @@
-export interface IDynamicArray<T> {
+export interface IListDynamicArray<T> {
   get length(): number;
 
   add(value: T): number;

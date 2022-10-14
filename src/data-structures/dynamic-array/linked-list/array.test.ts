@@ -1,15 +1,15 @@
-import DynamicArray from './array';
+import ListDynamicArray from './array';
 
-describe('DynamicArray', () => {
+describe('ListDynamicArray', () => {
   test('should init correctly', () => {
-    const array = new DynamicArray<number>(3);
+    const array = new ListDynamicArray<number>(3);
 
     expect(array.length).toBe(0);
     expect(array.get(1)).toBe(null);
   });
 
   test('should add correctly', () => {
-    const array = new DynamicArray<number>(3);
+    const array = new ListDynamicArray<number>(3);
 
     array.add(1);
 
@@ -17,7 +17,7 @@ describe('DynamicArray', () => {
   });
 
   test('should get correctly', () => {
-    const array = new DynamicArray<number>(3);
+    const array = new ListDynamicArray<number>(3);
 
     array.add(1);
     array.add(2);
