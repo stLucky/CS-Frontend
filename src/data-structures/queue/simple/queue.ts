@@ -1,8 +1,8 @@
 import LinkedList from '../../linked-list';
 
-import type { SimpleQueue } from '../interface';
+import type { ISimpleQueue } from './interface';
 
-export default class Queue<T> implements SimpleQueue<T> {
+export default class SimpleQueue<T> implements ISimpleQueue<T> {
   protected list: LinkedList<T>;
 
   constructor() {
