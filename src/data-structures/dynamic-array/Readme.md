@@ -1,13 +1,12 @@
 # data-structures/dynamic-array
 
 Этот модуль предоставляет 2 класса:
-  - ListDynamicArray - расширяемый массив на основе связанного списка;
-  - 
-
+  - `ListDynamicArray` - динамический расширяемый массив на основе связанного списка;
+  - `VectorDynamicArray` - динамический расширяемый массив на основе вектора;
 
 ## API
 
-### ListDynamicArray
+Апи классов идентичное и реализует интерфейс `IDynamicArray`
 
 #### add
 
@@ -16,7 +15,7 @@
 ```js
 import ListDynamicArray from 'data-structures/dynamic-array/linked-list';
 
-const arr = new ListDynamicArray(3 /* Размер фиксированного массива в списке */);
+const arr = new ListDynamicArray(3);
 
 arr.add(1); // 1
 arr.add(23); // 2

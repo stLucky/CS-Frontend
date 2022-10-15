@@ -1,18 +1,18 @@
 import LinkedList from '../../linked-list';
 
-import type { IListDynamicArray } from './interface';
+import type { IDynamicArray } from '../interface';
 
-export default class ListDynamicArray<T> implements IListDynamicArray<T> {
-  #list: LinkedList<T[]>;
+export default class ListDynamicArray<T> implements IDynamicArray<T> {
+  #capacity: number;
 
   #length = 0;
 
-  #capacity: number;
+  #buffer: LinkedList<T[]>;
 
   constructor(capacity = 3) {
     this.#capacity = capacity;
 
-    this.#list = new LinkedList();
+    this.#buffer = new LinkedList();
   }
 
   get length() {
@@ -20,11 +20,11 @@ export default class ListDynamicArray<T> implements IListDynamicArray<T> {
   }
 
   add(value: T) {
-    if (this.#list.isEmpty || this.#isLimit) {
+    if (this.#buffer.isEmpty || this.#isLimit) {
       this.#addItem();
     }
 
-    this.#list.last![this.#cursor] = value;
+    this.#buffer.last![this.#cursor] = value;
     this.#length += 1;
 
     return this.#length;
@@ -38,7 +38,7 @@ export default class ListDynamicArray<T> implements IListDynamicArray<T> {
     const countArr = Math.floor(index / this.#capacity);
     let count = 0;
 
-    for (const arr of this.#list) {
+    for (const arr of this.#buffer) {
       if (count === countArr) {
         return arr[index % this.#capacity];
       }
@@ -61,11 +61,11 @@ export default class ListDynamicArray<T> implements IListDynamicArray<T> {
 
   // добавляет новый элемент связанного списка
   #addItem() {
-    this.#list.push(Array(this.#capacity));
+    this.#buffer.push(Array(this.#capacity));
   }
 
   * [Symbol.iterator]() {
-    for (const arr of this.#list) {
+    for (const arr of this.#buffer) {
       for (const value of arr) {
         if (value != null) {
           yield value;
