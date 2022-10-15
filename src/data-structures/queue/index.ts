@@ -1,2 +1,2 @@
-export { default as ListDynamicArray } from './double';
-export { default as VectorDynamicArray } from './simple';
+export { default as DoubleQueue } from './double';
+export { default as SimpleQueue } from './simple';

@@ -1,7 +1,7 @@
 import SimpleQueue from '../simple';
 import type { IDoubleQueue } from './interface';
 
-export default class Queue<T> extends SimpleQueue<T> implements IDoubleQueue<T> {
+export default class DoubleQueue<T> extends SimpleQueue<T> implements IDoubleQueue<T> {
   get tail() {
     return this.list.last;
   }
