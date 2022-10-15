@@ -98,12 +98,31 @@ export default class LinkedList<T> {
     return this.#lengthStore;
   }
 
+  includes(value: T) {
+    for (const node of this.nodes()) {
+      if (node.value === value) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   * #values(isReverse = false) {
     let current = isReverse ? this.#lastNode : this.#firstNode;
 
     while (current) {
       yield current.value;
       current = isReverse ? current.prev : current.next;
+    }
+  }
+
+  * nodes() {
+    let current = this.#firstNode;
+
+    while (current) {
+      yield current;
+      current = current.next;
     }
   }
 

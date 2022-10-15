@@ -1,5 +1,5 @@
 export default class Node<T> {
-  readonly value: T;
+  value: T;
 
   next: Nullable<Node<T>> = null;
 

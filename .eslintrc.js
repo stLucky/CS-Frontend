@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     'no-restricted-syntax': 'off',
     'no-restricted-exports': 'off',
+    'no-param-reassign': 'off',
   },
   plugins: [
     '@typescript-eslint'

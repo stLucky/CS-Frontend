@@ -127,3 +127,17 @@ list.unshift(5); // 3
 
 console.log(Array.from(list)); // [5, 10, 20]
 ```
+
+### includes
+
+Проверяет существует ли элемент с таким значением и возвращает либо `true`, либо `false`
+
+```js
+import LinkedList from 'data-structures/linked-list';
+
+const list = new LinkedList();
+  
+list.push(10);
+
+console.log(list.includes(10);); // true
+```

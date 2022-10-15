@@ -55,5 +55,9 @@ describe('LinkedList', () => {
 
       expect(Array.from(list)).toEqual([76, 1, 10, 30]);
     });
+
+    test('should includes correctly', () => {
+      expect(list.includes(10)).toBeTruthy();
+    });
   });
 });
