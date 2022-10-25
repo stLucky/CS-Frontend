@@ -16,7 +16,9 @@ module.exports = {
     'no-restricted-exports': 'off',
     'no-param-reassign': 'off',
     '@typescript-eslint/no-implied-eval': 'off',
-    'no-template-curly-in-string': 'off'
+    'no-template-curly-in-string': 'off',
+    'no-plusplus': 'off',
+    '@typescript-eslint/no-use-before-define': 'off'
   },
   plugins: [
     '@typescript-eslint'
