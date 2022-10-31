@@ -18,7 +18,8 @@ module.exports = {
     '@typescript-eslint/no-implied-eval': 'off',
     'no-template-curly-in-string': 'off',
     'no-plusplus': 'off',
-    '@typescript-eslint/no-use-before-define': 'off'
+    '@typescript-eslint/no-use-before-define': 'off',
+    'consistent-return': 'off'
   },
   plugins: [
     '@typescript-eslint'
