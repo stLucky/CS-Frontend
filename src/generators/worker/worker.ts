@@ -1,6 +1,6 @@
-import { DefaultTimes, WorkerStatuses, WorkerResult } from './interface';
+import { DefaultTimes, IWorker } from './interface';
 
-export default class Worker<T, I extends Iterable<T>> {
+export default class Worker<T, I extends Iterable<T> = Iterable<T>> implements IWorker {
   #execTime: number;
 
   #delayTime: number;
@@ -17,28 +17,20 @@ export default class Worker<T, I extends Iterable<T>> {
     this.#delayTime = delay;
   }
 
-  run(): WorkerResult {
+  recalculateExecTime(time: number): void {
+    this.#execTime = time;
+  }
+
+  run(resolve: (v?: any) => void, reject: (r?: any) => void): void {
     const { value, done } = this.#executor.next();
-    const res = {
-      status: WorkerStatuses.CONTINUE,
-      payload: value,
-    };
 
-    if (done) {
-      res.status = WorkerStatuses.DONE;
-      return res;
-    }
+    if (done) return resolve(value);
 
-    if (value instanceof Error) {
-      res.status = WorkerStatuses.ERROR;
-      return res;
-    }
+    if (value instanceof Error) return reject(value);
 
     setTimeout(() => {
-      this.run();
+      this.run(resolve, reject);
     }, this.#delayTime);
-
-    return res;
   }
 
   * #createExecutor(

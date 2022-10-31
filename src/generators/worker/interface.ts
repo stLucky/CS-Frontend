@@ -3,13 +3,7 @@ export const enum DefaultTimes {
   EXEC = 100,
 }
 
-export const enum WorkerStatuses {
-  DONE = 'done',
-  CONTINUE = 'continue',
-  ERROR = 'error',
-}
-
-export interface WorkerResult {
-  status: WorkerStatuses
-  payload: number | Error | undefined
+export interface IWorker {
+  run(resolve: (v?: any) => void, reject: (r?: any) => void): void
+  recalculateExecTime(time: number): void
 }
