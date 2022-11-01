@@ -18,7 +18,7 @@ describe('SimpleTaskManager', () => {
     });
   });
 
-  test('should correctly execute the callback on each iteration of the loop for each task', () => {
+  test('should complete tasks in priority order', () => {
     let lowResult = 0;
     let averageResult = 0;
     let highResult = 0;
