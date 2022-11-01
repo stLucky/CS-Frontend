@@ -1,28 +1,23 @@
 import { DefaultTimes, IWorker } from './interface';
+import SimpleWorker from './simple-worker';
 
-export default class Worker<T, I extends Iterable<T> = Iterable<T>> implements IWorker {
-  #execTime: number;
-
+export default class Worker<T, I extends Iterable<T> = Iterable<T>>
+  extends SimpleWorker<T, I>
+  implements IWorker {
   #delayTime: number;
-
-  #executor: Generator<number | Error>;
 
   constructor(
     iterable: I,
     cb: (el: T, i: number, iterable: I) => void,
     { delay, exec } = { delay: DefaultTimes.DELAY, exec: DefaultTimes.EXEC },
   ) {
-    this.#executor = this.#createExecutor(iterable, cb);
-    this.#execTime = exec;
+    super(iterable, cb, { exec });
+
     this.#delayTime = delay;
   }
 
-  recalculateExecTime(time: number): void {
-    this.#execTime = time;
-  }
-
   run(resolve: (v?: any) => void, reject: (r?: any) => void): void {
-    const { value, done } = this.#executor.next();
+    const { value, done } = this.executor.next();
 
     if (done) return resolve(value);
 
@@ -31,28 +26,5 @@ export default class Worker<T, I extends Iterable<T> = Iterable<T>> implements I
     setTimeout(() => {
       this.run(resolve, reject);
     }, this.#delayTime);
-  }
-
-  * #createExecutor(
-    iterable: I,
-    cb: (el: T, i: number, iterable: I) => void,
-  ): Generator<number | Error> {
-    let start = Date.now();
-    let i = 0;
-
-    for (const el of iterable) {
-      try {
-        cb(el, i++, iterable);
-      } catch (err) {
-        if (err instanceof Error) {
-          yield err;
-        }
-      }
-
-      if (Date.now() - start > this.#execTime) {
-        yield i;
-        start = Date.now();
-      }
-    }
   }
 }

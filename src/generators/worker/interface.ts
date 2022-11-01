@@ -3,7 +3,11 @@ export const enum DefaultTimes {
   EXEC = 100,
 }
 
-export interface IWorker {
-  run(resolve: (v?: any) => void, reject: (r?: any) => void): void
+export interface ISimpleWorker {
+  executor: Generator<number | Error>
   recalculateExecTime(time: number): void
+}
+
+export interface IWorker extends ISimpleWorker {
+  run(resolve: (v?: any) => void, reject: (r?: any) => void): void
 }
