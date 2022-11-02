@@ -7,7 +7,7 @@
 
 
 ```js
-import forEach from 'generators/for-each'';
+import forEach from 'generators/for-each';
 
 let total = 0;
 

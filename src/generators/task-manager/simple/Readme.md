@@ -30,7 +30,7 @@ taskManager
     throw new Error('oops')
   })
   .then(() => {
-    console.log('fulfilled'); // 50e7
+    console.log('fulfilled');
   });
   .catch((err) => {
     console.log(err.message) // 'oops'
