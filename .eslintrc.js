@@ -19,7 +19,8 @@ module.exports = {
     'no-template-curly-in-string': 'off',
     'no-plusplus': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
-    'consistent-return': 'off'
+    'consistent-return': 'off',
+    '@typescript-eslint/no-shadow': 'off'
   },
   plugins: [
     '@typescript-eslint'
