@@ -1,50 +1,71 @@
+import { cast } from '../../helpers';
 import { toError } from './helpers';
-import { IResult } from './interface';
+import type {
+  IResult,
+  Data,
+  Executor,
+  FunctorExecutor,
+  MonadExecutor,
+} from './interface';
 
 export default class Result<T> implements IResult<T> {
   #error?: Error;
 
   #data?: T;
 
-  constructor(getData: () => T) {
+  constructor(getData: Executor<T>, isUnpack = true) {
     try {
-      this.#data = getData();
+      const res = getData();
+
+      if (isUnpack) {
+        this.#data = res instanceof Result ? res.#unwrap() : res;
+      } else {
+        this.#data = cast(res);
+      }
     } catch (error) {
       this.#error = toError(error);
     }
   }
 
-  map<R>(cb: (data: T) => R): Result<R> {
-    return new Result(() => {
-      if (this.#error != null) {
-        throw this.#error;
-      }
+  map<R>(cb: FunctorExecutor<T, R>): Result<R> {
+    if (this.#error != null) {
+      return Result.error(this.#error);
+    }
 
-      return cb(this.#data!);
-    });
+    return new Result(() => cb(this.#data!), false);
   }
 
-  flatMap<R>(cb: (data: T) => Result<R>): Result<R> {
-    return cb(this.#data!).map((data) => data);
+  flatMap<R>(cb: MonadExecutor<T, R>): Result<R> {
+    if (this.#error != null) {
+      return Result.error(this.#error);
+    }
+
+    return new Result(() => cb(this.#data!));
   }
 
-  catch<R>(cb: (err: Error) => R): Result<R | NonNullable<T>> {
-    return new Result(() => {
-      if (this.#error != null) {
-        return cb(this.#error);
-      }
+  catch<R>(cb: FunctorExecutor<Error, R>): Result<T | R> {
+    if (this.#error != null) {
+      return new Result(() => cb(this.#error!));
+    }
 
-      return this.#data!;
-    });
+    return Result.ok(this.#data!);
   }
 
-  static ok<T>(data: T): Result<T> {
+  static ok<T>(data: Data<T>): Result<T> {
     return new Result(() => data);
   }
 
-  static error(error: unknown): Result<undefined> {
+  static error<T>(error: unknown): Result<T> {
     return new Result(() => {
       throw toError(error);
     });
+  }
+
+  #unwrap() {
+    if (this.#error != null) {
+      throw this.#error;
+    }
+
+    return this.#data!;
   }
 }
