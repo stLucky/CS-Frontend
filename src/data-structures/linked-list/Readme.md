@@ -139,5 +139,21 @@ const list = new LinkedList();
   
 list.push(10);
 
-console.log(list.includes(10);); // true
+console.log(list.includes(10)); // true
+```
+
+### delete
+
+Удаляет элемент с переданным значением и возвращает `true`, если элемент был удален и  `false` в противном случае
+
+```js
+import LinkedList from 'data-structures/linked-list';
+
+const list = new LinkedList();
+  
+list.push(10);
+console.log(list.includes(10)); // true
+
+list.delete(10)
+console.log(list.includes(10)); // false
 ```

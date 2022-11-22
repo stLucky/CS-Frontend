@@ -23,8 +23,8 @@ export default class LinkedList<T> {
     return this.#firstNode == null;
   }
 
-  push(value: T) {
-    const node = new Node(value);
+  push(value: T | Node<T>) {
+    const node = value instanceof Node ? value : new Node(value);
 
     if (this.isEmpty) {
       this.#firstNode = node;
@@ -83,7 +83,7 @@ export default class LinkedList<T> {
   }
 
   unshift(value: T) {
-    const node = new Node(value);
+    const node = value instanceof Node ? value : new Node(value);
 
     if (this.isEmpty) {
       this.#lastNode = node;
@@ -108,12 +108,37 @@ export default class LinkedList<T> {
     return false;
   }
 
-  * #values(isReverse = false) {
-    let current = isReverse ? this.#lastNode : this.#firstNode;
+  delete(value: T | Node<T>) {
+    if (this.isEmpty) {
+      return false;
+    }
 
-    while (current) {
-      yield current.value;
-      current = isReverse ? current.prev : current.next;
+    if (value instanceof Node) {
+      this.#deleteNode(value);
+      return true;
+    }
+
+    for (const node of this.nodes()) {
+      if (node.value === value) {
+        this.#deleteNode(node);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  #deleteNode(node: Node<T>) {
+    if (node === this.#firstNode) {
+      this.#firstNode = node.next;
+    } else {
+      node.prev!.next = node.next;
+    }
+
+    if (node === this.#lastNode) {
+      this.#lastNode = node.prev;
+    } else {
+      node.next!.prev = node.prev;
     }
   }
 
@@ -134,5 +159,14 @@ export default class LinkedList<T> {
 
   [Symbol.iterator]() {
     return this.#values();
+  }
+
+  * #values(isReverse = false) {
+    let current = isReverse ? this.#lastNode : this.#firstNode;
+
+    while (current) {
+      yield current.value;
+      current = isReverse ? current.prev : current.next;
+    }
   }
 }

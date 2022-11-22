@@ -59,5 +59,17 @@ describe('LinkedList', () => {
     test('should includes correctly', () => {
       expect(list.includes(10)).toBeTruthy();
     });
+
+    test('should delete correctly', () => {
+      expect(list.includes(10)).toBeTruthy();
+
+      list.delete(10);
+      expect(list.includes(10)).toBeFalsy();
+
+      expect(list.includes(1)).toBeTruthy();
+
+      list.delete(1);
+      expect(list.includes(1)).toBeFalsy();
+    });
   });
 });
