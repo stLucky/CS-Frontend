@@ -82,7 +82,7 @@ export default class LinkedList<T> {
     return first!.value;
   }
 
-  unshift(value: T) {
+  unshift(value: T | Node<T>) {
     const node = value instanceof Node ? value : new Node(value);
 
     if (this.isEmpty) {
